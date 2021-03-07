@@ -2,17 +2,24 @@
 
 from os import system
 
-print("\n\n--------------------------------")
-print("--------  CALCULADORA ----------")
-print("--------------------------------\n\n")
+operations = {
+    's': 'subtração', 
+    'a': 'adição', 
+    'm': 'multiplicação', 
+    'd': 'divisão'
+    }
 
 msg_opers = ' \n Selecione uma operação: \n > s-subtração \n > a-adicao \n > m-multiplicação \n > d-divisão \n\n>> '
+
+# Verifica se a operation informada existe na lista de operações disponíveis
+def has_operation(operation):
+    return operation in operations.keys()
 
 # 
 def capture_operation():
     operation = input(msg_opers)
 
-    if operation not in ('s', 'a', 'm', 'd'):
+    if not has_operation(operation):
         system('clear')
         print(" \n Operação inválida! Escolha uma opção válida")
         return capture_operation()
@@ -43,8 +50,7 @@ def calculate(operation, num1, num2):
         result = num1 / num2
         msg = '{} / {} = {}'.format(num1, num2, result)
 
-    print('Resultado: {}'.format(msg))
-    return 
+    return 'Resultado: {}'.format(msg)
 
 def capture_numbers():
     num1 = input('Informe o primeiro numero  : ')
@@ -63,12 +69,16 @@ def again():
         return
 
 def main():
+
+    print("\n\n--------------------------------")
+    print("--------  CALCULADORA ----------")
+    print("--------------------------------\n\n")
+
     operation = capture_operation()
     (num1, num2) = capture_numbers()
 
-    calculate(operation, float(num1), float(num2))
-    again()
+    result = calculate(operation, float(num1), float(num2))
+    print(result)
 
-# Inicia a calculadora
-main()
+    again()
 
