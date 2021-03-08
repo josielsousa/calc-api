@@ -8,7 +8,7 @@ calculator_handler = Blueprint('calculator_handler', __name__, root_path='/calcu
 # returns an map of operations available.
 @calculator_handler.route('/calculator/operations', methods=['GET'])
 def get_operations():
-    return operations
+    return jsonify(operations)
 
 # define a calculate router to execute a operation.
 @calculator_handler.route('/calculator/<operation>/<int:num1>/<int:num2>')
